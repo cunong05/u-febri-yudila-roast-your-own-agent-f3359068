@@ -4,6 +4,8 @@ Builds a single roast line about an agent that failed spectacularly and
 then declared victory, checks it, and writes it to /output/entry.txt.
 """
 
+import os
+
 TARGET_TEXT = (
     "My agent apologized for the delay, called a tool that doesn't exist, "
     "apologized for that too, then filed the whole disaster under "
@@ -32,6 +34,7 @@ def build_entry():
 def save_line(line):
     """Write the checked line to /output/entry.txt with no trailing newline."""
     check_line(line)
+    os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as handle:
         handle.write(line)
 
